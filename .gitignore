@@ -1,0 +1,7 @@
+# 用户本地数据（不属于插件仓库）
+.shokz/
+.claude/
+
+# 系统文件
+.DS_Store
+Thumbs.db
