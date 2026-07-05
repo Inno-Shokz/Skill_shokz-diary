@@ -1,0 +1,19 @@
+{
+  "name": "shokz-local",
+  "owner": {
+    "name": "Shokz"
+  },
+  "metadata": {
+    "description": "Shokz 内部工具集",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "shokz-diary",
+      "description": "实习生每日复盘 Agent — 交互式提问生成结构化日报",
+      "version": "0.1.0",
+      "author": { "name": "Shokz" },
+      "source": "./plugins/shokz-diary"
+    }
+  ]
+}

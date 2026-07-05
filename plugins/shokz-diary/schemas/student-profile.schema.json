@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "StudentProfile",
+  "description": "学员 profile 配置，由 shokz-init 命令生成",
+  "type": "object",
+  "required": ["name", "mentor", "goal"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "学员姓名"
+    },
+    "mentor": {
+      "type": "string",
+      "description": "导师姓名"
+    },
+    "goal": {
+      "type": "string",
+      "description": "核心实习目标（固定锚点）"
+    },
+    "startDate": {
+      "type": "string",
+      "format": "date",
+      "description": "入职日期"
+    },
+    "outputDir": {
+      "type": "string",
+      "description": "日报输出目录路径（绝对或相对路径），默认为 .shokz/reports/"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "配置创建时间"
+    }
+  },
+  "additionalProperties": false
+}
