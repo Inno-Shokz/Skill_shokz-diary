@@ -1,6 +1,6 @@
 {
   "name": "shokz-diary",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "实习生每日复盘 Agent — 保真访谈生成企业级可提交日报",
   "author": {
     "name": "Shokz"
@@ -17,8 +17,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Shokz Diary",
-    "shortDescription": "保真访谈生成导师可批阅的企业级日报。",
-    "longDescription": "Shokz Diary 通过原始对话保真、事实清单确认、高风险追问、企业级日报正文、动态学员画像和导航索引，帮助实习生提交导师可直接批阅的每日复盘，并沉淀团队常见问题。",
+    "shortDescription": "三轮输入生成导师可批阅的实习生日报。",
+    "longDescription": "Shokz Diary 通过固定三轮输入、原始表达保真、时间归属标注、A/B/C/D AI 输出、动态学员画像和导航索引，帮助实习生提交导师可直接批阅的每日复盘，并避免 AI 美化掩盖真实沟通问题。",
     "developerName": "Shokz",
     "category": "Productivity",
     "capabilities": [

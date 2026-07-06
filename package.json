@@ -1,6 +1,6 @@
 {
   "name": "shokz-diary-skill",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "private": true,
   "description": "Shokz Diary plugin for enterprise-grade intern daily reports.",
   "type": "module",
