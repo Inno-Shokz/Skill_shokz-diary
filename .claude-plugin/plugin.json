@@ -1,7 +1,7 @@
 {
   "name": "shokz-diary",
-  "version": "0.2.0",
-  "description": "实习生每日复盘 Agent — 交互式提问生成结构化日报",
+  "version": "0.3.0",
+  "description": "实习生每日复盘 Agent — 保真访谈生成企业级可提交日报",
   "author": {
     "name": "Shokz"
   }

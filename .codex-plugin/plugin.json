@@ -1,10 +1,35 @@
 {
   "name": "shokz-diary",
-  "version": "0.2.0",
-  "description": "实习生每日复盘 Agent — 交互式提问生成结构化日报",
+  "version": "0.3.0",
+  "description": "实习生每日复盘 Agent — 保真访谈生成企业级可提交日报",
+  "author": {
+    "name": "Shokz"
+  },
+  "homepage": "https://github.com/Inno-Shokz/Skill_shokz-diary",
+  "repository": "https://github.com/Inno-Shokz/Skill_shokz-diary",
+  "keywords": [
+    "diary",
+    "internship",
+    "retrospective",
+    "report",
+    "coaching"
+  ],
   "skills": "./skills/",
-  "displayName": "Shokz Diary",
   "interface": {
-    "Interactive": true
+    "displayName": "Shokz Diary",
+    "shortDescription": "保真访谈生成导师可批阅的企业级日报。",
+    "longDescription": "Shokz Diary 通过原始对话保真、事实清单确认、高风险追问、企业级日报正文、动态学员画像和导航索引，帮助实习生提交导师可直接批阅的每日复盘，并沉淀团队常见问题。",
+    "developerName": "Shokz",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "帮我初始化 Shokz Diary 学员配置。",
+      "开始今天的企业级每日复盘。",
+      "校准今天的日报或学员画像。"
+    ]
   }
 }
