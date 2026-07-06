@@ -1,0 +1,10 @@
+{
+  "name": "shokz-diary",
+  "version": "0.2.0",
+  "description": "实习生每日复盘 Agent — 交互式提问生成结构化日报",
+  "skills": "./skills/",
+  "displayName": "Shokz Diary",
+  "interface": {
+    "Interactive": true
+  }
+}

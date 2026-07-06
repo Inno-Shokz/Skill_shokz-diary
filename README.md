@@ -10,7 +10,9 @@
 
 ## 安装
 
-在 Claude Code 的 `settings.json` 中添加以下配置：
+### Claude Code
+
+在 `settings.json` 中添加：
 
 ```json
 {
@@ -33,7 +35,20 @@ settings.json 位置：
 - Windows: `C:\Users\<用户名>\.claude\settings.json`
 - macOS: `~/.claude/settings.json`
 
-添加后重启 Claude Code，插件自动生效。后续更新会在每次启动时自动拉取。
+添加后重启 Claude Code，插件自动生效。后续更新自动拉取。
+
+### Codex CLI
+
+```bash
+/plugins
+```
+
+搜索 `shokz-diary`，选择 Install Plugin。
+
+或手动安装：
+```bash
+git clone https://github.com/Inno-Shokz/Skill_shokz-diary.git ~/.codex/shokz-diary
+```
 
 ## 使用
 
@@ -77,8 +92,16 @@ Agent 会：
 └── 导师反馈区
 ```
 
+## 支持平台
+
+| 平台 | 安装方式 | 状态 |
+|------|---------|------|
+| Claude Code | settings.json 配置 + autoUpdate | ✅ 支持 |
+| Codex CLI | /plugins 安装 | ✅ 支持 |
+| Cursor | 待适配 | 🔜 计划中 |
+
 ## 版本
 
-当前版本：`0.1.0`
+当前版本：`0.2.0`
 
-查看 [CHANGELOG](plugins/shokz-diary/CHANGELOG.md) 了解版本历史。
+查看 [CHANGELOG](CHANGELOG.md) 了解版本历史。
