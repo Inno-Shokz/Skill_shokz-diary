@@ -11,7 +11,10 @@
 - 新增画像/索引更新建议：默认只提出建议，学员确认后才写入长期记录
 - 校准流程升级：支持日报正文校准和画像校准，禁止反向改写历史原话
 - Codex manifest 升级为可通过插件校验的市场元数据结构
-- 新增 `docs/marketplace.md`，说明 Claude/Codex 市场订阅、下载、使用和更新流程
+- 明确单仓根插件结构：仓库根即 `shokz-diary` 插件，不使用 `plugins/shokz-diary/` 二层目录
+- 新增 `.agents/plugins/marketplace.json` 作为 Codex marketplace 订阅入口，且 `source.url` 指向仓库根 `./`
+- 新增 `package.json` 和 `hooks/hooks.json`，补齐版本管理与可选钩子目录
+- 更新 `docs/marketplace.md`，说明 Claude Code 与 Codex CLI 的根插件订阅、下载、使用和更新流程
 - 更新 README、日报模板、访谈代理和插件版本号
 
 ## 0.2.0 (2026-07-06)

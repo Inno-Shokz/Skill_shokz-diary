@@ -1,0 +1,23 @@
+{
+  "name": "shokz-diary-skill",
+  "version": "0.3.0",
+  "private": true,
+  "description": "Shokz Diary plugin for enterprise-grade intern daily reports.",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Inno-Shokz/Skill_shokz-diary.git"
+  },
+  "keywords": [
+    "codex-plugin",
+    "claude-plugin",
+    "skill",
+    "diary",
+    "internship",
+    "retrospective"
+  ],
+  "scripts": {
+    "validate:plugin": "python \"%USERPROFILE%\\.codex\\skills\\.system\\plugin-creator\\scripts\\validate_plugin.py\" .",
+    "validate:skill": "python \"%USERPROFILE%\\.codex\\skills\\.system\\skill-creator\\scripts\\quick_validate.py\" skills\\diary-generation"
+  }
+}

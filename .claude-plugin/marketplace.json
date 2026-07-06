@@ -1,5 +1,8 @@
 {
   "name": "shokz-tools",
+  "interface": {
+    "displayName": "Shokz Tools"
+  },
   "owner": {
     "name": "Shokz"
   },

@@ -20,9 +20,18 @@
 
 ## 安装
 
+本仓库采用和 `obra/superpowers` 相同的单仓根插件结构：仓库根目录就是 `shokz-diary` 插件，`skills/`、`commands/`、`agents/` 为多平台共享核心，`.claude-plugin/`、`.codex-plugin/`、`.agents/plugins/` 只是平台分发适配层。
+
 ### Claude Code
 
-在 `settings.json` 中添加：
+方式一：直接把当前仓库作为 marketplace 加入 Claude Code：
+
+```text
+/plugin marketplace add Inno-Shokz/Skill_shokz-diary
+/plugin install shokz-diary@shokz-tools
+```
+
+方式二：在 `settings.json` 中添加：
 
 ```json
 {
@@ -50,15 +59,35 @@ settings.json 位置：
 
 ### Codex CLI
 
-Codex 插件市场需要一个个人或团队 marketplace 指向本插件源码。团队发布时，将本仓库放入 marketplace 根目录的 `plugins/shokz-diary/`，并在 `.agents/plugins/marketplace.json` 中添加 `shokz-diary` 条目。
-
-用户安装：
+直接把当前仓库作为 marketplace 加入 Codex，再从该 marketplace 安装根插件：
 
 ```bash
+codex plugin marketplace add Inno-Shokz/Skill_shokz-diary
 codex plugin add shokz-diary@shokz-tools
 ```
 
+在 Codex CLI 中也可以先打开 `/plugins`，再搜索 `shokz-diary` 安装。
+
 详细发布、订阅和更新流程见 [Marketplace 发布与更新说明](docs/marketplace.md)。
+
+## 项目结构
+
+```text
+Skill_shokz-diary/
+├── .claude-plugin/                 # Claude Code manifest 与 marketplace 配置
+├── .codex-plugin/                  # Codex CLI plugin manifest
+├── .agents/plugins/                # Codex marketplace 订阅入口
+├── skills/diary-generation/        # 核心日报生成 skill
+├── commands/                       # Claude + Codex 共享命令
+├── agents/                         # 学员侧访谈代理定义
+├── schemas/                        # 本地配置 schema
+├── hooks/                          # 可选会话钩子配置
+├── README.md
+├── CHANGELOG.md
+└── package.json                    # 版本与校验脚本
+```
+
+仓库中不包含 `plugins/shokz-diary/` 子目录；Claude 与 Codex 的 marketplace `source` 都指向 `./`，即当前仓库根插件。
 
 ## 使用
 
@@ -143,8 +172,8 @@ Agent 会：
 
 | 平台 | 安装方式 | 状态 |
 |------|---------|------|
-| Claude Code | settings.json 配置 + autoUpdate | ✅ 支持 |
-| Codex CLI | /plugins 安装 | ✅ 支持 |
+| Claude Code | `/plugin` marketplace 安装 | ✅ 支持 |
+| Codex CLI | `codex plugin` marketplace 安装 | ✅ 支持 |
 | Cursor | 待适配 | 🔜 计划中 |
 
 ## 版本

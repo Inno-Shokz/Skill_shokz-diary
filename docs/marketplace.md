@@ -1,15 +1,41 @@
 # Marketplace 发布与更新说明
 
-本文说明如何让其他用户通过市场订阅、下载、使用和更新 `shokz-diary`。
+本文说明如何让学员直接通过当前仓库订阅、下载、使用和更新 `shokz-diary`。
 
-## 发布状态
+## 结构原则
 
-- Claude Code：本仓库已经包含 `.claude-plugin/marketplace.json` 和 `.claude-plugin/plugin.json`，可作为 GitHub marketplace 源使用。
-- Codex：本仓库已经包含通过校验的 `.codex-plugin/plugin.json`。若要在 Codex `/plugins` 市场中展示，需要由个人或团队 marketplace 指向该插件源码。
+当前仓库是 **plugin root**，不是“marketplace 包含 plugin”的二层结构。
 
-## Claude Code 市场订阅
+```text
+Skill_shokz-diary/
+├── .claude-plugin/plugin.json
+├── .claude-plugin/marketplace.json
+├── .codex-plugin/plugin.json
+├── .agents/plugins/marketplace.json
+├── skills/
+├── commands/
+└── agents/
+```
 
-用户在 Claude Code `settings.json` 中添加：
+关键约束：
+
+- 插件源码位于仓库根目录，不放入 `plugins/shokz-diary/`。
+- `.claude-plugin/marketplace.json` 是 Claude Code 订阅入口，`plugins[].source` 指向 `./`。
+- `.agents/plugins/marketplace.json` 是 Codex CLI 订阅入口，`plugins[].source.url` 指向 `./`。
+- `.codex-plugin/plugin.json` 是 Codex 插件 manifest。
+- `skills/`、`commands/`、`agents/` 是 Claude Code 与 Codex CLI 共享能力。
+- `.shokz/`、`.claude/` 是本地运行期数据或工具缓存，不提交到仓库。
+
+## Claude Code 安装
+
+学员执行：
+
+```text
+/plugin marketplace add Inno-Shokz/Skill_shokz-diary
+/plugin install shokz-diary@shokz-tools
+```
+
+或在 `settings.json` 中配置：
 
 ```json
 {
@@ -28,93 +54,82 @@
 }
 ```
 
-更新方式：
+## Codex CLI / Codex App 安装
 
-1. 维护者更新本仓库版本。
-2. 用户重启 Claude Code 或等待 marketplace autoUpdate。
-3. 新线程使用更新后的 commands、skills 和 agents。
-
-## Codex 市场订阅
-
-Codex marketplace 需要一个 marketplace 根目录，其结构应类似：
-
-```text
-shokz-marketplace/
-├── .agents/
-│   └── plugins/
-│       └── marketplace.json
-└── plugins/
-    └── shokz-diary/
-        ├── .codex-plugin/
-        │   └── plugin.json
-        ├── skills/
-        ├── commands/
-        ├── agents/
-        └── README.md
-```
-
-`shokz-marketplace/.agents/plugins/marketplace.json` 示例：
-
-```json
-{
-  "name": "shokz-tools",
-  "interface": {
-    "displayName": "Shokz Tools"
-  },
-  "plugins": [
-    {
-      "name": "shokz-diary",
-      "source": {
-        "source": "local",
-        "path": "./plugins/shokz-diary"
-      },
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_INSTALL"
-      },
-      "category": "Productivity"
-    }
-  ]
-}
-```
-
-用户首次订阅非默认团队 marketplace：
+学员执行：
 
 ```bash
-codex plugin marketplace add <path-to-shokz-marketplace>
+codex plugin marketplace add Inno-Shokz/Skill_shokz-diary
 codex plugin add shokz-diary@shokz-tools
 ```
 
-默认个人 marketplace 位于 `~/.agents/plugins/marketplace.json`，Codex 会隐式发现该路径；个人 marketplace 不需要执行 `codex plugin marketplace add`。
+也可以在 Codex CLI 中打开：
 
-## Codex 更新流程
+```text
+/plugins
+```
 
-维护者发布新版本后：
+然后搜索 `shokz-diary` 并安装。
 
-1. 确认 `.codex-plugin/plugin.json` 版本已更新。
-2. 确认 marketplace 指向的 `plugins/shokz-diary` 已更新到新源码。
-3. 用户运行：
-   ```bash
-   codex plugin add shokz-diary@shokz-tools
-   ```
-4. 用户开启新线程验证更新后的 skill 和 commands。
+## 使用
 
-本地开发迭代时，如果版本号不变，可使用 Codex cachebuster 版本，例如 `0.3.0+codex.local-YYYYMMDD-HHMMSS`，再重新安装插件。
+新线程中使用：
+
+```text
+/shokz-diary:shokz-init
+/shokz-diary:shokz-diary
+/shokz-diary:shokz-calibrate
+```
+
+## 更新流程
+
+维护者发布新版本：
+
+1. 修改 `skills/`、`commands/`、`agents/` 等插件源码。
+2. 同步更新 `package.json`、`.codex-plugin/plugin.json`、`.claude-plugin/plugin.json`、`.claude-plugin/marketplace.json` 版本号。
+3. 如 Codex marketplace 元数据变化，同步更新 `.agents/plugins/marketplace.json`。
+4. 提交并推送到 GitHub。
+
+学员更新：
+
+```bash
+codex plugin marketplace upgrade shokz-tools
+codex plugin add shokz-diary@shokz-tools
+```
+
+Claude Code 用户若配置了 `autoUpdate`，通常重启后会获取更新；否则重新执行：
+
+```text
+/plugin install shokz-diary@shokz-tools
+```
+
+## 什么时候才需要 `plugins/shokz-diary/`
+
+只有在维护一个集中 marketplace 仓库、并且该仓库同时分发多个插件时，才需要：
+
+```text
+some-marketplace/
+└── plugins/
+    └── shokz-diary/
+```
+
+当前仓库只分发 `shokz-diary` 一个插件，应保持和 `obra/superpowers` 一样的根插件结构。
 
 ## 发布前检查清单
 
 每次发布前运行：
 
 ```bash
-python "%USERPROFILE%\.codex\skills\.system\plugin-creator\scripts\validate_plugin.py" .
-python "%USERPROFILE%\.codex\skills\.system\skill-creator\scripts\quick_validate.py" skills\diary-generation
+npm run validate:plugin
+npm run validate:skill
 git diff --check
 ```
 
 检查项：
 
+- 不存在 `plugins/shokz-diary/` 子目录。
+- `.claude-plugin/marketplace.json` 的 `source` 指向 `./`。
+- `.agents/plugins/marketplace.json` 的 `source.url` 指向 `./`。
 - `.codex-plugin/plugin.json` 通过插件校验。
-- `.claude-plugin/marketplace.json`、`.claude-plugin/plugin.json`、`.codex-plugin/plugin.json` 版本一致。
-- README 和 CHANGELOG 中的当前版本一致。
+- `package.json`、README、CHANGELOG 和 manifest 版本一致。
 - 不提交 `.shokz/` 中的真实学员数据。
-- 新用户使用 `/shokz-diary:shokz-init` 可创建本地 profile、learner-profile 和 index。
